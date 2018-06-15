@@ -27,7 +27,7 @@ def check_empty():
     '''
     gpu_unused=list()
     pid_current,percent,memory,gpu_used=get_info()
-    for i in range(0,8):
+    for i in range(0,len(percent)):
         if not i in gpu_used:
             gpu_unused.append(i)
         
