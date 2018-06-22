@@ -36,6 +36,28 @@ def check_empty():
     else:
         return (gpu_unused)
 
+def get_users(gpu_id):
+    '''
+    return a dict {user1:mem1,user2:mem2} on GPU with id gpu_id
+    '''
+    ns=os.popen('nvidia-smi')
+    lines_ns=ns.readlines()
+    users_dict=dict()
+    for line in lines_ns:
+        if line.find('%')==-1 and line.find('MiB')!=-1:
+            arrs=re.split('[ ]+',line)
+            g_id=arrs[1]
+            if not int(g_id)==gpu_id:
+                continue
+            pid=arrs[2]
+            mem=int(line.split('MiB')[0][-5:])
+            user=get_user(pid)
+            if user in users_dict.keys():
+                users_dict[user]=mem+users_dict[user]
+            else:
+                users_dict[user]=mem
+    return users_dict
+
 def get_info():
     '''
     pid_list,percent,memory,gpu_used=get_info()
@@ -51,7 +73,7 @@ def get_info():
     for line in lines_ns:
         if line.find('%')!=-1:
             percent.append(int(line.split('%')[0][-3:]))
-            memory.append(int(line.split('MiB')[0][-4:]))
+            memory.append(int(line.split('MiB')[0][-5:]))
         if line.find('%')==-1 and line.find('MiB')!=-1:
             #processes
             arrs=re.split('[ ]+',line)
@@ -66,5 +88,6 @@ def get_info():
                 pid_list[pid]=list()
                 pid_list[pid].append(gpu_id)
     pid_current=pid_list.keys()
+    gpu_used=list(set(gpu_used))
     return pid_list,percent,memory,gpu_used
 

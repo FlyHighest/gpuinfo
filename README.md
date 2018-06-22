@@ -18,7 +18,9 @@ from gpuinfo import GPUInfo
 ```
 
 GPUInfo has the following functions:
- 
+    
+    get_users(gpu_id)
+        return a dict. show every user and memory on a certain gpu 
 
     check_empty()
         check_empty()
