@@ -72,7 +72,7 @@ def get_info():
     pid_list=dict()
     for line in lines_ns:
         if line.find('%')!=-1:
-            percent.append(int(line.split('%')[0][-3:]))
+            percent.append(int(line.split('%')[1][-3:]))
             memory.append(int(line.split('MiB')[0][-5:]))
         if line.find('%')==-1 and line.find('MiB')!=-1:
             #processes
@@ -91,3 +91,5 @@ def get_info():
     gpu_used=list(set(gpu_used))
     return pid_list,percent,memory,gpu_used
 
+if __name__=="__main__":
+    print(get_info())

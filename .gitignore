@@ -1,0 +1,4 @@
+setup.py
+dist
+gpuinfo.egg-info
+build
