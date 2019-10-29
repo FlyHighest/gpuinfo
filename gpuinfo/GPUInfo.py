@@ -72,7 +72,7 @@ def get_info():
     pid_list=dict()
     for line in lines_ns:
         if line.find('%')!=-1:
-            percent.append(int(line.split('%')[1][-3:]))
+            percent.append(int(line.split('%')[-2][-3:]))
             memory.append(int(line.split('MiB')[0][-5:]))
         if line.find('%')==-1 and line.find('MiB')!=-1:
             #processes
