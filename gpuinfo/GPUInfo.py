@@ -44,7 +44,8 @@ def get_users(gpu_id):
     lines_ns=ns.readlines()
     users_dict=dict()
     for line in lines_ns:
-        if line.find('%')==-1 and line.find('MiB')!=-1:
+        #if line.find('%')==-1 and line.find('MiB')!=-1:
+        if 'MiB' in line:
             arrs=re.split('[ ]+',line)
             g_id=arrs[1]
             if not int(g_id)==gpu_id:
