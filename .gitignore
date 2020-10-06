@@ -4,3 +4,4 @@ setup.py
 dist
 gpuinfo.egg-info
 build
+*/__pycache__/
