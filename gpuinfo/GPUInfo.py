@@ -82,7 +82,7 @@ def get_info():
             pid=arrs[2]
             process_name=arrs[4]
             gpu_used.append(int(gpu_id))
-            mem=int(arrs[5][:-3])
+            mem=int(arrs[-2][:-3])
             if pid in pid_list.keys():
                 pid_list[pid].append(gpu_id)
             else:
